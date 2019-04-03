@@ -1,0 +1,24 @@
+{
+  "name": "pali-cc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect=0.0.0.0 src/index.js",
+    "start:prod": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iifeoluwa/meals.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iifeoluwa/meals/issues"
+  },
+  "homepage": "https://github.com/iifeoluwa/meals#readme",
+  "dependencies": {
+    "restify": "^8.2.0"
+  }
+}
