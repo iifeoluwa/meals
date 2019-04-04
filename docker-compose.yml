@@ -21,4 +21,6 @@ services:
     container_name: cache
     expose:
       - 6379
+    volumes:
+      -  ./redis-data:/data
     
