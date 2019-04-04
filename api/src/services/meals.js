@@ -2,6 +2,8 @@
 
 const got = require('got');
 const config = require('config');
+const { cacheIngredientCount, getIngredientCountFromCache } = require('utils/redis');
+
 const MEALS_ENDPOINT = `${config.meals_api}lookup.php`;
 
 const fetchMealWithLeastIngredients = async (meals) => {
@@ -9,11 +11,16 @@ const fetchMealWithLeastIngredients = async (meals) => {
     let leastAmountOfIngredients = null, mealId = null, counter = 0;
 
     while(counter < noOfMeals) {
-        //TODO: Check cache for existing entry;
-        const ingredientCount = await fetchIngredientsCount(meals[counter]);
+        const currentMeal = meals[counter];
+        let ingredientCount = await getIngredientCountFromCache(currentMeal);
+
+        if(!ingredientCount) {
+            ingredientCount = await fetchIngredientsCount(currentMeal);
+            cacheIngredientCount(currentMeal, ingredientCount);
+        }
 
         if(!leastAmountOfIngredients || ingredientCount < leastAmountOfIngredients) {
-            mealId = meals[counter];
+            mealId = currentMeal;
             leastAmountOfIngredients = ingredientCount;
         }
         

@@ -5,11 +5,11 @@ const config = require('config/redis');
 
 const redis = new Redis(config.url);
 
-const cacheMeal = (meal, noOfIngredients) => {
+const cacheIngredientCount = (meal, noOfIngredients) => {
     return redis.set(transformToKey(meal), noOfIngredients);
 }
 
-const getMeal = (mealId) => {
+const getIngredientCountFromCache = (mealId) => {
     return redis.get(transformToKey(mealId));
 }
 
@@ -18,6 +18,6 @@ const transformToKey = (mealId) => {
 }
 
 module.exports = {
-    cacheMeal,
-    getMeal
+    cacheIngredientCount,
+    getIngredientCountFromCache
 }
