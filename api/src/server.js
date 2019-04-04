@@ -1,7 +1,8 @@
 'use strict';
 
 const restify = require('restify');
-const config = require('src/config');
+
+const config = require('config');
 const router = require('routes/meals');
 
 const server = restify.createServer({

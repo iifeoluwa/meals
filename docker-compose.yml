@@ -12,7 +12,7 @@ services:
       - REDIS_URL=redis://cache
       - NODE_ENV=development
       - PORT=3000
-      - NODE_PATH=.
+      - NODE_PATH=./src
     ports:
       - 3000:3000
     command: npm start
