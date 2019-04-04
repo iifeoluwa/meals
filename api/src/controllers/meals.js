@@ -2,8 +2,8 @@
 
 const MealService = require('../services/meals');
 
-const get = (req, res, next) => {
-    const mealId = MealService.fetchMealWithLeastIngredients(req.query.meals);
+const get = async (req, res, next) => {
+    const mealId = await MealService.fetchMealWithLeastIngredients(req.query.meals);
 
     res.send(200, {status: 'success', data: {mealId: mealId}});
     return next();

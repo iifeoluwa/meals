@@ -6,18 +6,18 @@ const MEALS_ENDPOINT = `${config.meals_api}lookup.php`;
 
 const fetchMealWithLeastIngredients = async (meals) => {
     const noOfMeals = meals.length;
-    let leastAmountOfIngredients = null, mealId = null;
+    let leastAmountOfIngredients = null, mealId = null, counter = 0;
 
-    while(noOfMeals) {
+    while(counter < noOfMeals) {
         //TODO: Check cache for existing entry;
-        const ingredientCount = await fetchMealIngredients(meals[noOfMeals]);
+        const ingredientCount = await fetchIngredientsCount(meals[counter]);
 
         if(!leastAmountOfIngredients || ingredientCount < leastAmountOfIngredients) {
-            mealId = meals[noOfMeals];
-            leastAmountOfIngredients= ingredientCount;
+            mealId = meals[counter];
+            leastAmountOfIngredients = ingredientCount;
         }
         
-        noOfMeals--;
+        counter++;
     }
 
     return mealId;
@@ -25,10 +25,11 @@ const fetchMealWithLeastIngredients = async (meals) => {
 
 const fetchIngredientsCount = async (mealId) => {
     const meal = await got(`${MEALS_ENDPOINT}?i=${mealId}`);
-    const mealData = meal.meals[0];
+    const mealData = JSON.parse(meal.body).meals[0];
+
     let ingredientCount = 0;
 
-    for (const key in mealData[0]) {
+    for (const key in mealData) {
         if (mealData.hasOwnProperty(key) && key.includes('strIngredient')) {
             if (mealData[key]) ingredientCount++;
             else break;
