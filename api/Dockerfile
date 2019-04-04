@@ -1,8 +1,5 @@
 FROM node:10-alpine as base
 
-ARG NODE_ENV=development
-ENV NODE_ENV=${NODE_ENV}
-
 RUN apk --no-cache add python make g++
 
 COPY package*.json ./

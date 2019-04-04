@@ -20,6 +20,7 @@
   "homepage": "https://github.com/iifeoluwa/meals#readme",
   "dependencies": {
     "got": "^9.6.0",
+    "ioredis": "^4.9.0",
     "restify": "^8.2.0"
   },
   "devDependencies": {

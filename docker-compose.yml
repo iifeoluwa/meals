@@ -6,7 +6,19 @@ services:
     volumes:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules
+    links: 
+      - redis
+    environment:
+      - REDIS_URL=redis://cache
+      - NODE_ENV=development
+      - PORT=3000
+      - NODE_PATH=.
     ports:
       - 3000:3000
-      - 9229:9229
     command: npm start
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+    

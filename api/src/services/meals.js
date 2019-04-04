@@ -1,7 +1,7 @@
 'use strict';
 
 const got = require('got');
-const config = require('../config');
+const config = require('config');
 const MEALS_ENDPOINT = `${config.meals_api}lookup.php`;
 
 const fetchMealWithLeastIngredients = async (meals) => {
