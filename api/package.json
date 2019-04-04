@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0 src/index.js",
-    "start:prod": "node src/index.js"
+    "start": "nodemon src/server.js",
+    "start:prod": "node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,10 @@
   },
   "homepage": "https://github.com/iifeoluwa/meals#readme",
   "dependencies": {
+    "got": "^9.6.0",
     "restify": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }

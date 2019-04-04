@@ -1,9 +1,12 @@
 'use strict';
 
-const get = (req, res, next) => {
-    const leastIngredients = MealService.fetchMealWithLeastIngredients(req.query.meals);
+const MealService = require('../services/meals');
 
-    res.send(200, {status: 'success', data: {mealId: leastIngredients}});
+const get = (req, res, next) => {
+    const mealId = MealService.fetchMealWithLeastIngredients(req.query.meals);
+
+    res.send(200, {status: 'success', data: {mealId: mealId}});
+    return next();
 }
 
 module.exports = {
