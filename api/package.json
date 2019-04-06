@@ -2,10 +2,11 @@
   "name": "pali-cc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "start:prod": "node src/server.js"
+    "start:prod": "node src/server.js",
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -19,11 +20,14 @@
   },
   "homepage": "https://github.com/iifeoluwa/meals#readme",
   "dependencies": {
-    "got": "^9.6.0",
-    "ioredis": "^4.9.0",
-    "restify": "^8.2.0"
+    "got": "9.6.0",
+    "ioredis": "4.9.0",
+    "restify": "8.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "chai": "4.2.0",
+    "mocha": "6.0.2",
+    "nodemon": "1.18.10",
+    "supertest": "4.0.2"
   }
 }

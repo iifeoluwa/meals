@@ -1,7 +1,7 @@
 'use strict';
 
 const Redis = require('ioredis');
-const config = require('config/redis');
+const config = require('src/config/redis');
 
 const redis = new Redis(config.url);
 

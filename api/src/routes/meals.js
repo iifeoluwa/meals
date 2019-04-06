@@ -1,7 +1,7 @@
 'use strict';
 
-const { get } = require('controllers/meals');
-const validateQueryString = require('middleware');
+const { get } = require('src/controllers/meals');
+const validateQueryString = require('src/middleware');
 
 module.exports = function(server) {
     server.get('/meals', validateQueryString, get);
