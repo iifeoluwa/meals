@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Perform basic sanity checks for the required `meals` query parameter
+ * @param {*} req Restify request object 
+ * @param {*} res Restify response object
+ * @param {*} next 
+ */
 const verifyQueryString = (req, res, next) => {
     if(!req.query.hasOwnProperty('meals')) {
         res.send(400, {status: 'error', message: 'Missing required query param'});
