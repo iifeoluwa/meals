@@ -1,8 +1,10 @@
 'use strict';
 
-const server = require('src/server')
-const request = require('supertest')(server);
 const { expect } = require('chai');
+const server = require('src/server');
+const request = require('supertest')(server);
+const messages = require('src/config/messages');
+
 
 describe('GET /', function() {
     it('returns a json response', function(done) {
@@ -30,7 +32,7 @@ describe('GET /meals', function() {
             .expect(400)
             .then(response => {
                 expect(response.body.status).to.equal('error');
-                expect(response.body.message).to.equal('Missing required query param');
+                expect(response.body.message).to.equal(messages.MISSING_PARAM);
                 done();
             });
     });
@@ -42,7 +44,7 @@ describe('GET /meals', function() {
             .expect(400)
             .then(response => {
                 expect(response.body.status).to.equal('error');
-                expect(response.body.message).to.equal('Invalid type for query param. Must be an array.');
+                expect(response.body.message).to.equal(messages.INVALID_PARAM_TYPE);
                 done();
             })
             .catch(error => {
