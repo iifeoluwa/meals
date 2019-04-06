@@ -33,7 +33,7 @@ Response:
 #### Running Tests
 From the root of the app directory, run this command;
 
-     ddocker-compose run --rm api-service npm run test
+     docker-compose run --rm api-service npm run test
 
 
 #
