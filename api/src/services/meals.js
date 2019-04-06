@@ -1,24 +1,27 @@
 'use strict';
 
 const got = require('got');
-const config = require('config');
-const { cacheIngredientCount, getIngredientCountFromCache } = require('utils/redis');
+const config = require('src/config');
+const { cacheIngredientCount, getIngredientCountFromCache } = require('src/utils/redis');
 
 const MEALS_ENDPOINT = `${config.meals_api}lookup.php`;
 
 const fetchMealWithLeastIngredients = async (meals) => {
     const noOfMeals = meals.length;
-    let leastAmountOfIngredients = null, mealId = null, counter = 0;
+    let leastAmountOfIngredients = null, mealId, counter = 0;
 
     while(counter < noOfMeals) {
         const currentMeal = meals[counter];
         let ingredientCount = await getIngredientCountFromCache(currentMeal);
-
+        
         if(!ingredientCount) {
             ingredientCount = await fetchIngredientsCount(currentMeal);
             cacheIngredientCount(currentMeal, ingredientCount);
+        } else {
+            // Cast value retrieved from cache to integer because Redis stores key-values data as string
+            ingredientCount = parseInt(ingredientCount);
         }
-
+ 
         if(!leastAmountOfIngredients || ingredientCount < leastAmountOfIngredients) {
             mealId = currentMeal;
             leastAmountOfIngredients = ingredientCount;

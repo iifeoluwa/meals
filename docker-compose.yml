@@ -10,12 +10,11 @@ services:
       - redis
     environment:
       - REDIS_URL=redis://cache
-      - NODE_ENV=development
+      - NODE_ENV=production
       - PORT=3000
-      - NODE_PATH=./src
+      - NODE_PATH=.
     ports:
       - 3000:3000
-    command: npm start
   redis:
     image: redis
     container_name: cache
